@@ -54,16 +54,20 @@ export default function Login() {
     });
   };
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   async function onSubmit(values) {
+    setLoading(true);
     const { data } = await axios.post(
       `${import.meta.env.VITE_URL}/api/auth/login`,
       values
     );
     if (data.success) {
+      setLoading(false);
       showToast(<CircleCheckBig />, data.message, "success");
       dispatch(login(data));
       navigate("/");
     } else {
+      setLoading(false);
       showToast(<CircleX />, data.message, "destructive");
     }
   }
@@ -123,8 +127,12 @@ export default function Login() {
               Register
             </Link>
           </div>
-          <Button type="submit" className="w-full bg-blue-700 text-white">
-            Submit
+          <Button
+            type="submit"
+            className="w-full bg-blue-700 text-white"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Login"}
           </Button>
         </form>
       </Form>
