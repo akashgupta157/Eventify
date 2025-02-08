@@ -58,12 +58,15 @@ export default function Register() {
     });
   };
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   async function onSubmit(values) {
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${import.meta.env.VITE_URL}/api/auth/register`,
         values
       );
+      setLoading(false);
       if (data.success) {
         showToast(<CircleCheckBig />, data.message, "success");
         dispatch(login(data));
@@ -144,8 +147,12 @@ export default function Register() {
               Login
             </Link>
           </div>
-          <Button type="submit" className="w-full bg-blue-700 text-white">
-            Submit
+          <Button
+            type="submit"
+            className="w-full bg-blue-700 text-white"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Register"}
           </Button>
         </form>
       </Form>
