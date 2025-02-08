@@ -59,5 +59,5 @@ Hosted on **Vercel**: [Live Link](https://eventify-indol.vercel.app)
     CLIENT_URL=your frontend link
 
 ## 🧑‍💻 Test User Credentials
-- **Email**: Colt.Blick@gmail.com
+- **Email**: Kirsten_Lebsack10@hotmail.com
 - **Password**: 123456
